@@ -1,0 +1,2247 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melox Investment Limited - Professional Investment Solutions</title>
+    <link rel="icon" type="image/png" href="images/melox.png">
+
+    <link rel="stylesheet" href="css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #3b82f6;
+            --accent-color: #f59e0b;
+            --dark-color: #1f2937;
+            --light-color: #f3f4f6;
+            --white: #ffffff;
+            --text-dark: #374151;
+            --text-light: #6b7280;
+
+            /* Design system: spacing & type scale */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 40px;
+
+            --fs-base: 16px;
+            --fs-sm: 14px;
+            --fs-lg: 20px;
+            --fs-xl: 32px;
+        }
+
+            /* Layout container */
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 1.25rem;
+            }
+
+            /* Skip link visible on focus */
+            .skip-link:focus {
+                position: fixed;
+                top: 12px;
+                left: 12px;
+                background: var(--white);
+                color: var(--text-dark);
+                padding: 8px 12px;
+                border-radius: 6px;
+                z-index: 2000;
+                box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+            }
+
+            body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            font-size: var(--fs-base);
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        /* Nav CTA */
+        .nav-cta {
+            margin-left: var(--space-md);
+            padding: 0.5rem 0.9rem;
+            border-radius: 6px;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 70px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
+            padding: 100px 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><path d="M0,300 Q300,200 600,300 T1200,300 L1200,600 L0,600 Z" fill="rgba(255,255,255,0.05)"/></svg>') no-repeat center bottom;
+            background-size: cover;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        .btn {
+            padding: 0.75rem 1.25rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: var(--white);
+            padding: 1rem 1.75rem;
+            border-radius: 8px;
+            box-shadow: 0 8px 30px rgba(245,158,11,0.18);
+        }
+
+        .btn-primary:hover {
+            background: #d97706;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.4);
+        }
+
+        /* Focus styles for accessibility */
+        :focus {
+            outline: none;
+        }
+
+        :focus-visible, button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible {
+            box-shadow: 0 0 0 4px rgba(59,130,246,0.15);
+            border-radius: 6px;
+        }
+
+        /* Screen-reader only helper */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255,255,255,0.18);
+            backdrop-filter: blur(4px);
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--primary-color);
+            border-color: rgba(255,255,255,0.28);
+        }
+
+        /* Stats Section */
+        .stats {
+            background: var(--white);
+            padding: 4rem 2rem;
+            margin-top: -50px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 2rem;
+            background: var(--light-color);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+        }
+
+        .section-header p {
+            color: var(--text-light);
+            font-size: 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(15,23,42,0.06);
+            transition: transform 0.28s ease, box-shadow 0.28s ease;
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 25px 50px rgba(15,23,42,0.12);
+        }
+
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, rgba(59,130,246,0.95), rgba(30,58,138,0.95));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            color: var(--white);
+        }
+
+        .service-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.125rem;
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+            font-size: 0.98rem;
+            margin: 0;
+        }
+
+        /* About Section */
+        .about {
+            padding: 0;
+            background: var(--white);
+        }
+
+        .about-container {
+            max-width: 100%;
+            margin: 0 auto;
+            display: block;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--white);
+        }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .about-features {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .about-features li {
+            padding: 0.8rem 0;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .about-features li::before {
+            content: '✓';
+            width: 30px;
+            height: 30px;
+            background: var(--secondary-color);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* Why Choose Us */
+        .why-choose {
+            padding: 5rem 2rem;
+            background: var(--light-color);
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-box {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .feature-box .icon {
+            width: 80px;
+            height: 80px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: var(--secondary-color);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .feature-box h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .feature-box p {
+            color: var(--text-light);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 5rem 2rem;
+            background: var(--white);
+        }
+
+        .testimonials-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--light-color);
+            padding: 2rem;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            left: 1.5rem;
+            font-size: 4rem;
+            color: var(--secondary-color);
+            opacity: 0.3;
+        }
+
+        .testimonial-text {
+            color: var(--text-dark);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: bold;
+        }
+
+        .author-info h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.2rem;
+        }
+
+        .author-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 2rem;
+            background: var(--light-color);
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            flex-shrink: 0;
+        }
+
+        .info-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .info-content p {
+            color: var(--text-light);
+        }
+
+        .contact-form {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid var(--light-color);
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:invalid, .form-group textarea:invalid {
+            border-color: #ef4444; /* red */
+            box-shadow: 0 0 0 4px rgba(239,68,68,0.06);
+        }
+
+        .form-error {
+            color: #ef4444;
+            font-size: 0.95rem;
+            margin-top: 6px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-color);
+            color: var(--white);
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--white);
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .about-container,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-container {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--secondary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .scroll-top:hover {
+            background: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        .scroll-top.visible {
+            display: flex;
+        }
+           /* HERO SLIDER */
+.hero-slider {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.slides-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+/* HERO CONTENT */
+.hero-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    z-index: 5;
+    max-width: 700px;
+    padding: 20px;
+    background: rgba(0,0,0,0.45);
+    border-radius: 10px;
+}
+
+.hero-overlay h1 {
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.hero-overlay p {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+/* Navigation Arrows */
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.arrow.left { left: 20px; }
+.arrow.right { right: 20px; }
+
+
+        /* BUTTON STYLING */
+        .cta-buttons a {
+            margin: 10px;
+            padding: 12px 24px;
+            display: inline-block;
+        }
+
+        /* ARROWS */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.35);
+            color: white;
+            border: none;
+            font-size: 40px;
+            padding: 10px 18px;
+            cursor: pointer;
+            z-index: 10;
+            border-radius: 5px;
+        }
+
+        .arrow.left {
+            left: 20px;
+        }
+
+        .arrow.right {
+            right: 20px;
+        }
+
+        .arrow:hover {
+            background: rgba(0,0,0,0.55);
+        }
+
+        /* RESPONSIVENESS */
+        @media (max-width: 768px) {
+            .hero-overlay h1 {
+                font-size: 28px;
+            }
+
+            .hero-overlay p {
+                font-size: 16px;
+            }
+        }
+                .about-image-grid {
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    grid-auto-rows: 1fr;
+                    width: 100%;
+                    max-width: 1200px;
+                    margin: 0 auto;
+                    padding: 0;
+                    overflow: hidden;
+                    gap: 20px;
+                }
+
+        .about-image-grid img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;              /* Fill space properly */
+            border: none !important;
+            box-shadow: none !important;
+        }
+
+        /* END OF video IMAGE GRID STYLES */
+        /* Logos Section (legacy) */
+        .logos {
+            width: 100%;
+            background: transparent;
+            padding: 2rem 0;
+        }
+
+        .logos-container {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            height: auto;
+        }
+
+        .logos-container img {
+            max-width: 220px;
+            height: auto;
+            object-fit: contain;
+        }
+
+       /* Stats Row */
+        .display-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.display-stat {
+    text-align: center;
+}
+
+.display-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: conic-gradient(
+        #c7b299 0deg,
+        #c7b299 0deg, /* will be updated dynamically */
+        #f0f0f0 0deg 360deg
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #333;
+    position: relative;
+    margin-bottom: 10px;
+    font-size: 28px;
+}
+
+.display-circle-number {
+    position: absolute;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .display-stats {
+        justify-content: space-around;
+        gap: 20px;
+    }
+}
+
+        /* Display Section */
+.display-section {
+    width: 100%;
+    padding: 100px 0; /* Add space above and below */
+    box-sizing: border-box; /* Ensure padding doesn't break layout */
+}
+
+.display-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1200px; /* Limit container width */
+    margin: 0 auto; /* Center container */
+}
+
+/* Left Image Column */
+.display-left {
+    flex: 1 1 50%;
+    min-width: 300px;
+}
+
+.display-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Right Text Column */
+.display-right {
+    flex: 1 1 50%;
+    min-width: 300px;
+    padding: 0 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Stats Row */
+.display-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+/* ... keep the rest as before ... */
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .display-container {
+        flex-direction: column;
+    }
+
+    .display-left, .display-right {
+        flex: 1 1 100%;
+        min-width: 100%;
+        padding: 0;
+    }
+
+    .display-image {
+        height: 400px; /* fixed height for mobile */
+    }
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.social-icons a {
+    text-decoration: none;
+    color: #fff; /* white icons, change as needed */
+    font-size: 24px;
+    transition: transform 0.3s, color 0.3s;
+}
+
+.social-icons a:hover {
+    transform: scale(1.2);
+    color: #ffd700; /* example hover color */
+}
+
+.map-responsive {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.map-responsive iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+.logo {
+    display: flex;
+    align-items: center;       /* vertically center image and text */
+    gap: 10px;                 /* space between image and text */
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.logo span {
+    font-weight: normal;       /* optional: make 'Investment' lighter */
+}
+
+.logo-img {
+    width: 40px;               /* default size */
+    height: auto;
+}
+
+@media screen and (max-width: 768px) {
+    .logo {
+        font-size: 20px;       /* smaller text on tablets */
+    }
+    .logo-img {
+        width: 30px;           /* smaller logo on tablets */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .logo {
+        font-size: 18px;       /* smaller text on mobile */
+    }
+    .logo-img {
+        width: 25px;           /* smaller logo on mobile */
+    }
+}
+
+
+.hero-description {
+    max-width: 900px;
+    margin: 40px auto;
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.8;
+    color: #333;
+    padding: 0 20px;
+}
+
+
+
+    </style>
+</head>
+<body>
+    <a href="#services" class="skip-link sr-only">Skip to content</a>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <!-- <div class="logo">Melox <span>Investment</span></div> -->
+             <div class="logo">
+             <img src="images/melox.png" alt="Melox Logo" class="logo-img">
+             Melox <span>Investment</span>
+             </div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Our Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contacts</a></li>
+            </ul>
+            <a href="#contact" class="btn btn-primary nav-cta" aria-label="Contact us">Contact Us</a>
+            <button class="mobile-menu" id="mobileMenu" aria-controls="navLinks" aria-expanded="false" aria-label="Toggle navigation">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Your Trusted Investment Partner</h1>
+            <p>Building wealth and securing futures through strategic investment solutions tailored to your financial goals</p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn btn-primary">Get Started</a>
+                <a href="#services" class="btn btn-secondary">Our Services</a>
+            </div>
+        </div>
+    </section> -->
+    <!-- Hero Section -->
+    <!-- <section class="hero-slider" id="home">
+        <div class="slides-container">
+            <div class="slide" style="background-image: url('images/image1.jpeg');"></div>
+            <div class="slide" style="background-image: url('images/image2.jpeg');"></div>
+            <div class="slide" style="background-image: url('images/image33.jpeg');"></div>
+            <div class="slide" style="background-image: url('images/image4.jpeg');"></div>
+        </div>
+
+         Hero Content 
+        <div class="hero-overlay" role="region" aria-labelledby="hero-heading">
+            <h1 id="hero-heading">Sustainable Infrastructure Investments That Deliver Long‑Term Returns</h1>
+            <p>We finance and build strategic projects across Africa — delivering measurable impact and stable returns for investors.</p>
+            <div class="cta-buttons" role="group" aria-label="Primary actions">
+                <a href="#contact" class="btn btn-primary" id="primaryCta">Talk to an Expert</a>
+                <a href="#services" class="btn btn-secondary">View Services</a>
+            </div>
+        </div>
+
+         Navigation Arrows 
+        <button class="arrow left" id="prevSlide">n</button>
+        <button class="arrow right" id="nextSlide">o</button>
+    </section> -->
+    <!-- Hero Section -->
+    <section class="hero-slider" id="home">
+        <div class="slides-container">
+            <div class="slide active" style="background-image: url('images/image1.jpg');"></div>
+            <div class="slide" style="background-image: url('images/image2.jpg');"></div>
+            <div class="slide" style="background-image: url('images/image3.jpg');"></div>
+            <div class="slide" style="background-image: url('images/image4.jpg');"></div>
+        </div> 
+
+        <!-- Hero Content -->
+        <div class="hero-overlay" role="region" aria-labelledby="hero-heading">
+            <h1 id="hero-heading">Sustainable Infrastructure Investments That Deliver Long‑Term Returns</h1>
+            <p>We finance and build strategic projects across Africa — delivering measurable impact and stable returns for investors.</p>
+            <div class="cta-buttons" role="group" aria-label="Primary actions">
+                <a href="#contact" class="btn btn-primary">Talk to an Expert</a>
+                <a href="#services" class="btn btn-secondary">View Services</a>
+            </div>
+        </div>
+
+        <!-- Navigation Arrows -->
+        <button class="arrow left" id="prevSlide">n</button>
+        <button class="arrow right" id="nextSlide">o</button>
+    </section>
+
+
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="section-header">
+            <h2>Our Core Services</h2>
+            <p>Comprehensive financial solutions designed to maximize your returns and minimize risks</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">💼</div>
+                <h3>Infrastructure Investment & Development</h3>
+                <p>Investing in Projects that power Africa's progress.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📊</div>
+                <h3>Public-Private Partnership(PPP) Advisory & Execution</h3>
+                <p>Bridging public needs with private sector innovation.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🏢</div>
+                <h3>Public-Private Partnership(PPP) Advisory 7 Execution</h3>
+                <p>Driving growth through smart capital and strategy.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💰</div>
+                <h3>Technical & Project Management Solutions</h3>
+                <p>Deliver excellence from concept to copetition.</p>
+            </div>
+            
+        </div>
+    </section>
+    <!-- Board of Members Section -->
+     <!-- Board of Members Section -->
+      <!-- Board of Members Section -->
+<!-- Board of Members Section -->
+<section class="services" id="board">
+    <div class="section-header">
+        <h2>Board of Members</h2>
+        <p>Our experienced and visionary leadership guiding Melox Investment</p>
+    </div>
+    <div class="services-grid">
+        <div class="service-card">
+            <div class="service-icon">
+                <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?crop=faces&fit=crop&w=100&h=100" alt="John Doe" style="border-radius:50%; width:80px; height:80px;">
+            </div>
+            <h3>John Doe</h3>
+            <p>CEO - Leading overall strategy and company vision.</p>
+        </div>
+        <div class="service-card">
+            <div class="service-icon">
+                <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?crop=faces&fit=crop&w=100&h=100" alt="Jane Smith" style="border-radius:50%; width:80px; height:80px;">
+            </div>
+            <h3>Jane Smith</h3>
+            <p>Secretary - Managing board documentation and corporate governance.</p>
+        </div>
+       
+        <div class="service-card">
+            <div class="service-icon">
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?crop=faces&fit=crop&w=100&h=100" alt="Emily White" style="border-radius:50%; width:80px; height:80px;">
+            </div>
+            <h3>Emily White</h3>
+            <p>Chief Financial Officer - Overseeing financial planning and reporting.</p>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+    <!-- About Section
+    <section class="about" id="about">
+        <div class="about-container">
+            <div class="about-image">📊</div> 
+            <div class="about-content">
+                <h2 style="text-align: center;">About Us</h2>
+                <h3 style="text-align: center; font-size: 48px; font-weight: bold; line-height: 1.3;">
+    DELIVERING EXCELLENCE ACROSS EVERY PROJECT.
+</h3>
+
+               <div style="width: 100%; text-align: center;">
+    <p style="font-size: 40px; font-weight: bold; line-height: 1.2;">
+        Creating lasting value through strategic partnerships!<br>
+        Our focus is <span id="rotating-word" style="text-decoration: underline; font-weight: bold;">growth</span>.
+    </p>
+</div>
+
+
+                <ul class="about-features">
+                    <li>Licensed and regulated investment firm</li>
+                    <li>Proven track record of success</li>
+                    <li>Transparent and ethical practices</li>
+                    <li>Personalized investment strategies</li>
+                    <li>Dedicated client support team</li>
+                </ul>
+            </div>
+        </div>
+    </section> -->
+
+            <!-- About Section -->
+       <style>
+  .about {
+    padding: 100px 20px;
+    background: #f9fafb;
+  }
+
+  .about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .about-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .about-header h2 {
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #0a4ce3;
+    margin-bottom: 12px;
+  }
+
+  .about-header h3 {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #111827;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .about-text {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto 80px auto;
+    font-size: 18px;
+    line-height: 1.7;
+    color: #374151;
+  }
+
+  .about-text strong {
+    color: #111827;
+    font-weight: 600;
+  }
+
+  .about-highlight {
+    display: inline-block;
+    margin-top: 12px;
+    font-weight: 700;
+    color: #0a4ce3;
+    border-bottom: 2px solid #0a4ce3;
+  }
+
+  .about-image-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .about-image-grid img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .about-image-grid img:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+  }
+
+  @media (max-width: 1024px) {
+    .about-image-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .about-header h3 {
+      font-size: 28px;
+    }
+
+    .about-text {
+      font-size: 16px;
+    }
+
+    .about-image-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .about-image-grid img {
+      height: 240px;
+    }
+  }
+</style>
+
+<section class="about" id="about">
+  <div class="about-container">
+
+    <div class="about-header">
+      <h2>About Us</h2>
+      <h3>Delivering Excellence Across Every Project</h3>
+    </div>
+
+    <p class="about-text">
+      <strong>Melox</strong> is a diversified investment holding company focused on driving
+      sustainable growth across Africa’s core infrastructure sectors — Energy, Transport,
+      Water, Industrial, and Agriculture.
+
+      Headquartered in Nairobi, Kenya, and partnering with both local and international
+      investors, we take a hands-on approach to developing impactful projects that
+      transform communities and accelerate economic growth.
+
+      Our focus goes beyond capital deployment. We create long-term value through
+      innovation, operational excellence, and strategic collaboration.
+
+      <span class="about-highlight">Our focus is growth.</span>
+    </p>
+
+    <div class="about-image-grid">
+      <img src="images/about1.jpg" alt="Energy infrastructure project">
+      <img src="images/about2.jpg" alt="Transport infrastructure project">
+      <img src="images/about3.jpg" alt="Industrial development project">
+      <img src="images/about4.jpg" alt="Agricultural investment project">
+    </div>
+
+  </div>
+</section>
+
+
+    <!-- Why Choose Us Section -->
+    <section class="why-choose" id="why-choose">
+        <div class="section-header">
+            <h2>Why Choose Melox Investment?</h2>
+            <p>We stand out through our commitment to excellence and client success</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-box">
+                <div class="icon">🛡️</div>
+                <h3>Secure & Reliable</h3>
+                <p>Your investments are protected with industry-leading security measures and insurance coverage.</p>
+            </div>
+            <div class="feature-box">
+                <div class="icon">👥</div>
+                <h3>Expert Team</h3>
+                <p>Our team consists of certified financial planners and investment specialists with decades of combined experience.</p>
+            </div>
+            <div class="feature-box">
+                <div class="icon">💎</div>
+                <h3>Premium Service</h3>
+                <p>Enjoy personalized attention and premium service tailored to your unique financial situation.</p>
+            </div>
+            <div class="feature-box">
+                <div class="icon">📱</div>
+                <h3>24/7 Access</h3>
+                <p>Monitor your investments anytime, anywhere with our secure online platform and mobile app.</p>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-header">
+            <h2>Our Customer Reviews</h2>
+            <p>Don't just take our word for it - hear from our satisfied clients</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text">Melox Investment transformed my financial future. Their expert guidance helped me achieve returns I never thought possible. Highly recommended!</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">JK</div>
+                    <div class="author-info">
+                        <h4>John Kamau</h4>
+                        <p>Business Owner</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">Professional, transparent, and results-driven. The team at Melox truly cares about their clients' success. My portfolio has grown significantly.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">SM</div>
+                    <div class="author-info">
+                        <h4>Sarah Mwangi</h4>
+                        <p>Corporate Executive</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">I've been with Melox for 5 years and couldn't be happier. They consistently deliver excellent returns and provide clear, honest communication.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">DO</div>
+                    <div class="author-info">
+                        <h4>David Ochieng</h4>
+                        <p>Retired Professional</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Stats Section  -->
+    <section class="stats">
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-number">23</div>
+                <div class="stat-label">Patnerships</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">48</div>
+                <div class="stat-label">Projects</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">13</div>
+                <div class="stat-label">Countries</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">7</div>
+                <div class="stat-label">Years</div>
+            </div>
+        </div>
+    </section>
+    <!-- Video Section -->
+        <section class="video-section" style="text-align:center; padding:3rem 1rem; background:#f9f9f9;">
+            <!-- <h2 style="font-size:36px; margin-bottom:1rem;">Our Video</h2>
+            <p style="margin-bottom:2rem;">Click the video to learn more about us!</p> -->
+
+            <!-- Video Thumbnail -->
+            <div style="position:relative; display:inline-block; cursor:pointer;" id="videoThumb">
+                <img src="images/maxresdefault.jpg" alt="Play Video" style="width:100%; max-width:800px; border-radius:10px;">
+                <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+                            font-size:80px; color:rgba(255,255,255,0.8); pointer-events:none;">
+                    �
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal Popup -->
+        <div id="videoModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+                                    background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:9999;">
+            <div style="position:relative; width:90%; max-width:900px;">
+                <span id="videoModalClose" style="position:absolute; top:-40px; right:0; font-size:40px; color:white; cursor:pointer;">�</span>
+                <iframe id="videoIframe" width="100%" height="480" src="" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen=""></iframe>
+            </div>
+        </div>
+
+                                <!-- Logos Section -->
+<section class="logos" id="logos" aria-labelledby="logos-heading">
+    <style>
+        .logos {
+            padding: clamp(40px, 6vw, 100px) 20px;
+            background: linear-gradient(180deg, #fbfdff 0%, #f8fafc 100%);
+            border-top: 1px solid rgba(15,23,42,0.03);
+            border-bottom: 1px solid rgba(15,23,42,0.03);
+        }
+
+        .logos-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 12px;
+        }
+
+        .logos-label {
+            font-size: 0.875rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #6b7280;
+            margin-bottom: 28px;
+            font-weight: 700;
+        }
+
+        .logos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: clamp(20px, 3.5vw, 64px);
+            align-items: center;
+            justify-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .partner {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px;
+            border-radius: 8px;
+            transition: transform 220ms ease, box-shadow 220ms ease;
+            text-decoration: none;
+        }
+
+        .partner img {
+            max-height: 80px;
+            max-width: 160px;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            filter: grayscale(100%) contrast(0.95);
+            opacity: 0.82;
+            transition: transform 220ms ease, filter 220ms ease, opacity 220ms ease;
+            display: block;
+        }
+
+        .partner:hover img,
+        .partner:focus img {
+            filter: grayscale(0%) contrast(1.02);
+            opacity: 1;
+            transform: scale(1.04);
+        }
+
+        .partner:focus-visible {
+            outline: none;
+            box-shadow: 0 8px 30px rgba(2,6,23,0.08);
+            border-radius: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .logos {
+                padding: 36px 12px;
+            }
+            .partner img {
+                max-height: 64px;
+                max-width: 140px;
+            }
+        }
+    </style>
+
+    <div class="logos-container container">
+        <p id="logos-heading" class="logos-label">Trusted by Partners &amp; Stakeholders</p>
+
+        <div class="logos-grid" role="list">
+            <a class="partner" role="listitem" href="#" aria-label="Partner 1" title="Partner 1">
+                <img src="images/logo1.png" alt="Partner 1 logo">
+            </a>
+            <a class="partner" role="listitem" href="#" aria-label="Partner 2" title="Partner 2">
+                <img src="images/logo2.png" alt="Partner 2 logo">
+            </a>
+            <a class="partner" role="listitem" href="#" aria-label="Partner 3" title="Partner 3">
+                <img src="images/logo3.png" alt="Partner 3 logo">
+            </a>
+        </div>
+    </div>
+</section>
+
+
+        <!-- Display Section -->
+    <!-- Display Section -->
+<section class="display-section">
+    <div class="display-container">
+
+        <!-- Left Image Column -->
+        <div class="display-left">
+            <img src="images/display1.jpg" alt="Team working together" class="display-image">
+        </div>
+
+        <!-- Right Text Column -->
+        <div class="display-right">
+            
+            <h1 class="display-title">STRATEGIC VISION</h1>
+
+            <h2 class="display-title">Empowering Growth Through Innovation</h2>
+
+            <p class="display-description">
+                At Melox Investment Limited, we create impact beyond profits. By leveraging strategic partnerships, smart planning, and disciplined execution, we unlock value while fostering sustainable growth across the sectors we operate in.
+            </p>
+
+            <div class="display-stats">
+
+        <div class="display-stat">
+            <div class="display-circle" data-percent="94">
+                <span class="display-circle-number">94%</span>
+            </div>
+            <p class="display-stat-label">Client Satisfaction</p>
+        </div>
+
+        <div class="display-stat">
+            <div class="display-circle" data-percent="89">
+                <span class="display-circle-number">89%</span>
+            </div>
+            <p class="display-stat-label">Project Success</p>
+        </div>
+
+</div>
+
+
+        </div>
+
+    </div>
+</section>
+
+
+
+<!-- 
+    Contact Section -->
+    <!-- Contact Section -->
+<section class="contact" id="contact">
+    <div class="section-header">
+        <h2>Get In Touch</h2>
+        <p>Ready to start your investment journey? Contact us today</p>
+    </div>
+
+    <div class="contact-container">
+
+        <!-- <div class="contact-info">
+            <div class="info-item">
+                <div class="info-icon">📍</div>
+                <div class="info-content">
+                    <h3>Our Office</h3>
+                    <p>P.O. Box 42498<br>GPO Nairobi<br>Kenya</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">✉️</div>
+                <div class="info-content">
+                    <h3>Email</h3>
+                    <p>GOBOENTERPRICES@HOTMAIL.COM</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">🕒</div>
+                <div class="info-content">
+                    <h3>Business Hours</h3>
+                    <p>Monday - Friday: 8:00 AM - 6:00 PM</p>
+                    <p>Saturday: 9:00 AM - 2:00 PM</p>
+                </div>
+            </div>
+        </div> -->
+
+     <div class="contact-info">
+    <div class="info-item">
+        <div class="info-icon">📍</div>
+        <div class="info-content">
+            <h3>Our Office Location</h3>
+            <p>P.O. Box 42498 GPO<br> Nairobi Kenya</p>
+        </div>
+    </div>
+
+    <div class="info-item">
+        <div class="info-icon">📞</div>
+        <div class="info-content">
+            <h3>Phone Number</h3>
+            <p>+254754276961</p>
+        </div>
+    </div>
+
+
+    <div class="info-item">
+        <div class="info-icon">✉️</div>
+        <div class="info-content">
+            <h3>Email</h3>
+            <p>meloxinvestments@gmail.com</p>
+        </div>
+    </div>
+
+    <div class="info-item">
+        <div class="info-icon">🕒</div>
+        <div class="info-content">
+            <h3>Business Hours</h3>
+            <p>Monday - Friday: 8:00 AM - 6:00 PM</p>
+            <p>Saturday: 9:00 AM - 2:00 PM</p>
+        </div>
+    </div>
+
+    <!-- Responsive Map Section -->
+    <div class="info-item map-item">
+        <div class="map-responsive">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6816.822001661311!2d36.818921342259166!3d-1.2862556863587542!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f10d6d9ac76b1%3A0x2ddd74d47025eabc!2sMazel%20Investment%20Ltd!5e1!3m2!1sen!2ske!4v1765440486379!5m2!1sen!2ske" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+</div>
+
+
+        <!-- Contact Form using Formspree with AJAX and spinner -->
+        <form id="contactForm" class="contact-form" action="https://formspree.io/f/xeoypjeb" method="POST">
+
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your full name" required="">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required="">
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+            </div>
+
+            <div class="form-group">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" placeholder="Message Subject" required="">
+            </div>
+
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="Tell us about your investment goals" required=""></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;" id="submitBtn">
+                <span id="btnText">Send Message</span>
+                <span id="btnSpinner" style="display:none;">⏳</span>
+            </button>
+
+            <!-- Message display -->
+            <div id="formMessage" aria-live="polite" style="margin-top: 15px;"></div>
+        </form>
+
+    </div>
+</section>
+
+<!-- AJAX Script with spinner -->
+<script>
+document.getElementById("contactForm").addEventListener("submit", function(e) {
+    e.preventDefault(); // Prevent page reload
+
+    const form = e.target;
+    const formData = new FormData(form);
+    const formMessage = document.getElementById("formMessage");
+    const submitBtn = document.getElementById("submitBtn");
+    const btnText = document.getElementById("btnText");
+    const btnSpinner = document.getElementById("btnSpinner");
+
+    // Client-side validation: show an inline message and focus first invalid control
+    if (!form.checkValidity()) {
+        formMessage.style.color = "red";
+        formMessage.textContent = "Please complete the required fields correctly.";
+        const firstInvalid = form.querySelector(':invalid');
+        if (firstInvalid) firstInvalid.focus();
+        return;
+    }
+
+    // Show spinner
+    btnText.style.display = "none";
+    btnSpinner.style.display = "inline";
+
+    fetch(form.action, {
+        method: "POST",
+        body: formData,
+        headers: {
+            'Accept': 'application/json'
+        }
+    }).then(response => {
+        // Hide spinner
+        btnText.style.display = "inline";
+        btnSpinner.style.display = "none";
+
+        if (response.ok) {
+            formMessage.style.color = "green";
+            formMessage.textContent = "Thank you! Your message has been sent.";
+            form.reset();
+        } else {
+            response.json().then(data => {
+                formMessage.style.color = "red";
+                if (data.errors) {
+                    formMessage.textContent = data.errors.map(error => error.message).join(", ");
+                } else {
+                    formMessage.textContent = "Oops! There was a problem submitting your form.";
+                }
+            })
+        }
+    }).catch(error => {
+        btnText.style.display = "inline";
+        btnSpinner.style.display = "none";
+
+        formMessage.style.color = "red";
+        formMessage.textContent = "Oops! There was a problem submitting your form.";
+    });
+});
+</script>
+
+    
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Melox Investment Limited</h3>
+                <p>Your trusted partner in building wealth and securing financial futures.</p>
+                <div class="footer-section">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="https://web.facebook.com/profile.php?id=61585649577414" target="_blank" title="Facebook">
+                     <i class="fab fa-facebook-f"></i>
+                </a>
+
+                
+                
+                <a href="https://www.instagram.com/meloxinvestment/" target="_blank" title="Instagram">
+                  <i class="fab fa-instagram"></i>
+                </a>
+
+            </div>
+        </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#home">Home</a>
+                <a href="#services"> Our Services</a>
+                <a href="#about">About Us</a>
+                <a href="#contact">Contacts</a>
+            </div>
+            <div class="footer-section">
+                <h3>Services</h3>
+                <a href="#services">Infrastructure Investment & Development</a>
+                <a href="#services">Public-Private Partnership(PPP) Advisory & Execution</a>
+                <a href="#services">Technical & Project Management Solutions</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>P.O. Box 42498, GPO Nairobi</p>
+                <p>Email:meloxinvestments@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>� 2025 Melox Investment Limited. All rights reserved. | Licensed & Regulated</p>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTop">↑</button>
+
+    <script>
+        // Mobile Menu Toggle (accessible)
+        const mobileMenu = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenu.addEventListener('click', () => {
+            const expanded = mobileMenu.getAttribute('aria-expanded') === 'true';
+            mobileMenu.setAttribute('aria-expanded', (!expanded).toString());
+            navLinks.classList.toggle('active');
+        });
+
+        // Support keyboard activation (Enter / Space)
+        mobileMenu.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                mobileMenu.click();
+            }
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenu.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll to top button
+        const scrollTopBtn = document.getElementById('scrollTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission handler
+        function handleSubmit() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const message = document.getElementById('message').value;
+
+            if (!name || !email || !phone || !message) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address');
+                return;
+            }
+
+            // Success message
+            alert('Thank you for your message! We will contact you shortly.');
+            
+            // Clear form
+            document.getElementById('name').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('phone').value = '';
+            document.getElementById('message').value = '';
+        }
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe service cards and other elements
+        document.querySelectorAll('.service-card, .feature-box, .testimonial-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Counter animation for stats
+        function animateCounter(element, target) {
+            let current = 0;
+            const increment = target / 100;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target + (element.dataset.suffix || '');
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current) + (element.dataset.suffix || '');
+                }
+            }, 20);
+        }
+
+        // Trigger counter animation when stats section is visible
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    document.querySelectorAll('.stat-number').forEach(stat => {
+                        const target = parseInt(stat.textContent);
+                        stat.dataset.suffix = stat.textContent.replace(/[0-9]/g, '');
+                        animateCounter(stat, target);
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const statsSection = document.querySelector('.stats');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+
+                        let currentSlide = 0;
+        const slidesContainer = document.querySelector(".slides-container");
+        const totalSlides = document.querySelectorAll(".slide").length;
+
+        function showSlide(index) {
+            currentSlide = (index + totalSlides) % totalSlides;
+            slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+
+        // Auto slide every 3 seconds
+        let autoSlide = setInterval(() => {
+            showSlide(currentSlide + 1);
+        }, 3000); // 3 seconds per slide
+
+        // Arrow Controls
+        document.getElementById("prevSlide").addEventListener("click", () => {
+            clearInterval(autoSlide);
+            showSlide(currentSlide - 1);
+            autoSlide = setInterval(() => showSlide(currentSlide + 1), 3000);
+        });
+
+        document.getElementById("nextSlide").addEventListener("click", () => {
+            clearInterval(autoSlide);
+            showSlide(currentSlide + 1);
+            autoSlide = setInterval(() => showSlide(currentSlide + 1), 3000);
+        });
+        // Rotating words in About section
+         const words = ["growth", "success", "resilience"];
+    let currentIndex = 0;
+    const rotatingWord = document.getElementById("rotating-word");
+
+    setInterval(() => {
+        currentIndex = (currentIndex + 1) % words.length;
+        rotatingWord.textContent = words[currentIndex];
+    }, 2000); // change every 2 seconds
+
+    //video
+            const thumb = document.getElementById('videoThumb');
+        const modal = document.getElementById('videoModal');
+        const iframe = document.getElementById('videoIframe');
+        const closeBtn = document.getElementById('videoModalClose');
+
+        const youtubeURL = 'https://www.youtube.com/embed/k0l8bwoq8Gs?autoplay=1&rel=0';
+
+        thumb.addEventListener('click', () => {
+            iframe.src = youtubeURL;
+            modal.style.display = 'flex';
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+            iframe.src = '';
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                iframe.src = '';
+            }
+        });
+
+        document.querySelectorAll('.display-circle').forEach(circle => {
+        const percent = circle.getAttribute('data-percent');
+        const degree = (percent / 100) * 360;
+        circle.style.background = `conic-gradient(#c7b299 0deg ${degree}deg, #f0f0f0 ${degree}deg 360deg)`;
+        });
+        
+const slides = document.querySelectorAll(".slides-container .slide");
+const prevBtn = document.getElementById("prevSlide");
+const nextBtn = document.getElementById("nextSlide");
+
+// Show slide by index
+function showSlide(index) {
+    slides.forEach((slide, i) => {
+        slide.classList.remove("active");
+        if (i === index) slide.classList.add("active");
+    });
+}
+
+// Auto slide every 3 seconds
+let slideInterval = setInterval(() => {
+    currentIndex = (currentIndex + 1) % slides.length;
+    showSlide(currentIndex);
+}, 3000);
+
+// Manual controls
+nextBtn.addEventListener("click", () => {
+    clearInterval(slideInterval);
+    currentIndex = (currentIndex + 1) % slides.length;
+    showSlide(currentIndex);
+    restartInterval();
+});
+
+prevBtn.addEventListener("click", () => {
+    clearInterval(slideInterval);
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    showSlide(currentIndex);
+    restartInterval();
+});
+
+function restartInterval() {
+    slideInterval = setInterval(() => {
+        currentIndex = (currentIndex + 1) % slides.length;
+        showSlide(currentIndex);
+    }, 3000);
+}
+document.addEventListener("DOMContentLoaded", () => {
+    let currentSlide = 0;
+    const slides = document.querySelectorAll(".slide");
+    const totalSlides = slides.length;
+
+    const showSlide = (index) => {
+        slides.forEach((slide) => slide.classList.remove("active"));
+        currentSlide = (index + totalSlides) % totalSlides; 
+        slides[currentSlide].classList.add("active");
+    };
+
+    
+    let autoSlide = setInterval(() => showSlide(currentSlide + 1), 3000);
+
+    
+    document.getElementById("prevSlide").addEventListener("click", () => {
+        clearInterval(autoSlide);
+        showSlide(currentSlide - 1);
+        autoSlide = setInterval(() => showSlide(currentSlide + 1), 3000);
+    });
+
+    document.getElementById("nextSlide").addEventListener("click", () => {
+        clearInterval(autoSlide);
+        showSlide(currentSlide + 1);
+        autoSlide = setInterval(() => showSlide(currentSlide + 1), 3000);
+    });
+});
+
+    </script>
+    
+
+
+                </body></html>
